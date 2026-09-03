@@ -43,6 +43,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
   display: flex; align-items: center; gap: 10px;
 }
 .section-label::before { content: ''; width: 24px; height: 1px; background: currentColor; flex-shrink: 0; }
+.cta-label::before { display: none; }
 
 .colorbar { display: flex; height: 6px; width: 100%; }
 .colorbar div { flex: 1; }
@@ -101,17 +102,17 @@ nav.visible { opacity: 1; }
 .nav-logo img { height: 28px; width: auto; display: block; }
 .nav-links { display: flex; align-items: center; gap: 2.5rem; }
 .nav-links a {
-  color: var(--text-dim); text-decoration: none; font-size: 12px;
+  color: rgba(255,255,255,0.82); text-decoration: none; font-size: 12px;
   letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--text); }
 .nav-cta {
-  background: transparent; color: var(--text);
-  border: 1px solid rgba(255,255,255,0.22); padding: 8px 20px;
+  background: rgba(255,255,255,0.82); color: #000;
+  border: 1px solid rgba(255,255,255,0.82); padding: 8px 20px;
   border-radius: 2px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
-  cursor: pointer; text-decoration: none; transition: background 0.2s, border-color 0.2s;
+  cursor: pointer; text-decoration: none; transition: opacity 0.2s;
 }
-.nav-cta:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+.nav-cta:hover { opacity: 0.88; }
 
 /* HERO */
 #hero {
@@ -140,7 +141,7 @@ nav.visible { opacity: 1; }
 .hero-headline .h-solid { display: block; color: var(--text); }
 .hero-headline .h-outline {
   display: block; color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255,255,255,0.28);
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.65);
 }
 .hero-headline .h-cycle {
   display: block; position: relative; height: 1.05em; overflow: hidden;
@@ -151,10 +152,11 @@ nav.visible { opacity: 1; }
 }
 .word-slot span { display: block; height: 1.05em; line-height: 1.05; }
 .hero-sub {
-  font-size: 16px; line-height: 1.75; color: rgba(255,255,255,0.85);
-  max-width: 780px; margin-bottom: 3rem;
+  font-size: 22px; font-weight: 600; letter-spacing: 0.02em; line-height: 1.4;
+  color: rgba(255,255,255,0.9); max-width: 780px; margin-bottom: 1.25rem; width: 100%;
 }
-.hero-actions { display: flex; align-items: center; gap: 1.75rem; flex-wrap: wrap; }
+.hero-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+.hero-btns { display: flex; align-items: center; gap: 1.75rem; flex-wrap: wrap; }
 .btn-primary {
   background: var(--text); color: var(--bg);
   padding: 14px 32px; border: none; border-radius: 2px;
@@ -190,6 +192,7 @@ nav.visible { opacity: 1; }
 .clients-strip {
   padding: 2.5rem 0;
   border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   overflow: hidden;
 }
 .clients-label {
@@ -198,7 +201,7 @@ nav.visible { opacity: 1; }
 }
 .clients-track {
   display: flex; width: max-content;
-  animation: marquee 30s linear infinite;
+  animation: marquee 50s linear infinite;
   align-items: center;
 }
 .clients-track:hover { animation-play-state: paused; }
@@ -219,7 +222,7 @@ nav.visible { opacity: 1; }
 }
 .marquee-track {
   display: flex; gap: 0; width: max-content;
-  animation: marquee 24s linear infinite;
+  animation: marquee 50s linear infinite;
 }
 .marquee-track:hover { animation-play-state: paused; }
 @keyframes marquee {
@@ -245,7 +248,7 @@ nav.visible { opacity: 1; }
   font-size: clamp(3rem, 6vw, 5.5rem);
   line-height: 0.92; letter-spacing: 0.01em;
 }
-.services-intro { font-size: 15px; color: var(--text-dim); line-height: 1.7; max-width: 540px; }
+.services-intro { font-size: 15px; color: var(--text-dim); line-height: 1.7; max-width: 75%; }
 .services-grid {
   display: grid; grid-template-columns: repeat(2, 1fr);
   gap: 1px; background: var(--border); border: 1px solid var(--border);
@@ -280,12 +283,12 @@ nav.visible { opacity: 1; }
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2.25rem; letter-spacing: 0.02em; margin-bottom: 1rem;
 }
-.s-desc { font-size: 14px; line-height: 1.75; color: var(--text-dim); }
+.s-desc { font-size: 14px; line-height: 1.75; color: rgba(255,255,255,0.8); }
 .s-tags { margin-top: 1.75rem; display: flex; flex-wrap: wrap; gap: 8px; }
 .s-tag {
-  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
   border: 1px solid rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 2px;
-  color: var(--text-dim);
+  color: var(--text-dim); background: rgba(0,0,0,0.45);
 }
 
 /* WORK */
@@ -293,17 +296,19 @@ nav.visible { opacity: 1; }
 .work-header { margin-bottom: 3rem; padding: 0 2rem; }
 .work-bars {
   display: flex; height: 70vh; min-height: 480px; max-height: 700px;
-  gap: 3px;
+  gap: 3px; background: #000;
 }
 .work-bar {
   position: relative; overflow: hidden; cursor: pointer;
   flex: 1; transition: flex 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+  background: #000; transform: translateZ(0);
 }
 .work-bars:hover .work-bar { flex: 0.18; }
 .work-bars .work-bar:hover { flex: 4; }
 .work-vid {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; transition: transform 0.6s ease;
+  will-change: transform;
 }
 .work-bar:hover .work-vid { transform: scale(1.03); }
 .wb-1 .work-vid, .wb-2 .work-vid { transform: scale(1.4); }
@@ -313,26 +318,33 @@ nav.visible { opacity: 1; }
   transition: opacity 0.6s ease;
 }
 .work-bar:hover .wb-color { opacity: 0; }
-.wb-1 .wb-color { background: var(--blue); }
-.wb-2 .wb-color { background: var(--magenta); }
-.wb-3 .wb-color { background: var(--cyan); }
-.wb-4 .wb-color { background: var(--yellow); }
+.wb-1 .wb-color { background: var(--yellow); }
+.wb-1 .work-vid { object-position: right center; }
+.wb-2 .wb-color { background: var(--cyan); }
+.wb-3 .wb-color { background: var(--green); }
+.wb-4 .wb-color { background: var(--magenta); }
+.wb-5 .wb-color { background: var(--red); }
+.wb-6 .wb-color { background: var(--blue); }
 .wb-label {
   position: absolute; inset: 0;
   display: flex; flex-direction: column;
   justify-content: flex-end; padding: 1.5rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.75) 100%);
+  transition: background 0.4s ease;
+}
+.work-bar:hover .wb-label {
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.75) 100%);
   transition: opacity 0.4s ease;
 }
 .wb-title-vert {
-  position: absolute; bottom: 1.5rem; left: 1.25rem; right: 1.25rem;
+  position: absolute; top: 1.5rem; left: 1.25rem; right: 1.25rem;
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(13px, 1.6vw, 20px);
   letter-spacing: 0.1em;
   color: white;
   line-height: 1.2;
   opacity: 1; transition: opacity 0.35s ease;
-  pointer-events: none;
+  pointer-events: none; z-index: 2;
 }
 .work-bar:hover .wb-title-vert { opacity: 0; }
 .wb-detail {
@@ -346,6 +358,7 @@ nav.visible { opacity: 1; }
   margin-bottom: 6px; color: white;
 }
 .w-cat { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+.w-role { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 4px; }
 .w-play {
   margin-top: 14px; display: flex; align-items: center; gap: 8px;
   font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7);
@@ -394,15 +407,50 @@ nav.visible { opacity: 1; }
 /* TEAM */
 #team { padding: 7rem 0; border-top: 1px solid var(--border); }
 #team .section-inner { padding: 0 2rem; }
+@keyframes grain {
+  0%   { transform: translate(0, 0); }
+  10%  { transform: translate(-2%, -3%); }
+  20%  { transform: translate(3%, 1%); }
+  30%  { transform: translate(-1%, 4%); }
+  40%  { transform: translate(4%, -2%); }
+  50%  { transform: translate(-3%, 2%); }
+  60%  { transform: translate(2%, -4%); }
+  70%  { transform: translate(-4%, 1%); }
+  80%  { transform: translate(1%, 3%); }
+  90%  { transform: translate(3%, -1%); }
+  100% { transform: translate(0, 0); }
+}
+.team-grid::after {
+  content: '';
+  position: absolute; inset: -5%; pointer-events: none; z-index: 10;
+  opacity: 0.25;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  animation: grain 0.5s steps(1) infinite;
+}
 .team-grid {
   display: grid; grid-template-columns: 40px 40px 1fr 1fr 1fr 40px 40px;
-  gap: 3px; margin-top: 3.5rem;
+  gap: 3px; margin-top: 3.5rem; position: relative; overflow: hidden;
 }
-.team-colorbar { display: block; }
-.team-colorbar.tcb-left  { background: var(--yellow); }
-.team-colorbar.tcb-left2 { background: var(--red); }
-.team-colorbar.tcb-right2 { background: var(--cyan); }
-.team-colorbar.tcb-right  { background: var(--green); }
+.team-colorbar {
+  display: block;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.team-colorbar.tcb-left   { background: #ffffff;        transition-delay: 0s; }
+.team-colorbar.tcb-left2  { background: var(--yellow);  transition-delay: 0.2s; }
+.team-colorbar.tcb-right2 { background: var(--red);     transition-delay: 0.2s; }
+.team-colorbar.tcb-right  { background: var(--blue);    transition-delay: 0s; }
+.team-grid.team-visible .team-colorbar { clip-path: inset(0 0% 0 0); }
+.team-grid.team-visible .team-card { opacity: 1; transform: translateY(0); }
+.team-card {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.1s ease, transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.team-card.tc-1 { transition-delay: 0.3s; }
+.team-card.tc-2 { transition-delay: 0.55s; }
+.team-card.tc-3 { transition-delay: 0.8s; }
 .team-card {
   position: relative; overflow: hidden; cursor: default;
   display: flex; flex-direction: column;
@@ -427,12 +475,13 @@ nav.visible { opacity: 1; }
   position: absolute; inset: 0; z-index: 1; opacity: 0.75; transition: opacity 0.5s ease; pointer-events: none;
 }
 .team-card:hover .tc-color { opacity: 0.25; }
-.tc-1 .tc-color { background: linear-gradient(to bottom, rgba(0,0,255,0.75) 0%, rgba(0,0,255,0.25) 55%, rgba(0,0,255,0.15) 100%); }
-.tc-2 .tc-color { background: linear-gradient(to bottom, rgba(255,0,220,0.75) 0%, rgba(255,0,220,0.25) 55%, rgba(255,0,220,0.15) 100%); }
-.tc-3 .tc-color { background: linear-gradient(to bottom, rgba(0,210,230,0.75) 0%, rgba(0,210,230,0.25) 55%, rgba(0,210,230,0.15) 100%); }
+.tc-1 .tc-color { background: linear-gradient(to bottom, rgba(0,255,255,0.75) 0%, rgba(0,255,255,0.25) 55%, rgba(0,255,255,0.15) 100%); }
+.tc-2 .tc-color { background: linear-gradient(to bottom, rgba(0,204,0,0.75) 0%, rgba(0,204,0,0.25) 55%, rgba(0,204,0,0.15) 100%); }
+.tc-3 .tc-color { background: linear-gradient(to bottom, rgba(255,0,255,0.75) 0%, rgba(255,0,255,0.25) 55%, rgba(255,0,255,0.15) 100%); }
 .tc-info {
   padding: 1.5rem 2rem 2.5rem; position: relative; z-index: 2;
   background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.85) 100%);
+  flex: 1;
 }
 .t-name { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.04em; margin-bottom: 4px; }
 .t-role {
@@ -458,10 +507,16 @@ nav.visible { opacity: 1; }
   pointer-events: none;
 }
 .cta-inner { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; }
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+}
 .cta-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(3.5rem, 9vw, 9rem);
   line-height: 0.92; letter-spacing: 0.01em; margin-bottom: 1.5rem;
+  display: inline-block;
+  animation: breathe 14s ease-in-out infinite;
 }
 .cta-sub { font-size: 16px; color: var(--text-dim); margin-bottom: 3rem; line-height: 1.7; max-width: 480px; margin-left: auto; margin-right: auto; }
 .cta-contacts {
@@ -485,11 +540,21 @@ footer { border-top: 1px solid var(--border); }
 .footer-links a:hover { color: var(--text-dim); }
 
 /* ANIMATIONS */
-.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 1.5s ease, transform 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
-.fade-up:nth-child(2) { transition-delay: 0.08s; }
-.fade-up:nth-child(3) { transition-delay: 0.16s; }
-.fade-up:nth-child(4) { transition-delay: 0.24s; }
+.work-bars.fade-up { transform: none; opacity: 1; }
+.work-bars.fade-up.visible { transform: none; }
+.work-bar { clip-path: inset(0 100% 0 0); transition: clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+.work-bars.visible .work-bar { clip-path: inset(0 0% 0 0); }
+.work-bars.visible .wb-1 { transition-delay: 0s; }
+.work-bars.visible .wb-2 { transition-delay: 0.18s; }
+.work-bars.visible .wb-3 { transition-delay: 0.36s; }
+.work-bars.visible .wb-4 { transition-delay: 0.54s; }
+.work-bars.visible .wb-5 { transition-delay: 0.72s; }
+.work-bars.visible .wb-6 { transition-delay: 0.90s; }
+.fade-up:nth-child(2) { transition-delay: 0.2s; }
+.fade-up:nth-child(3) { transition-delay: 0.4s; }
+.fade-up:nth-child(4) { transition-delay: 0.6s; }
 
 @media (max-width: 800px) {
   .services-grid, .team-grid { grid-template-columns: 1fr; }
@@ -537,10 +602,12 @@ footer { border-top: 1px solid var(--border); }
         <div class="word-slot" id="wordSlot"></div>
       </span>
     </h1>
-    <p class="hero-sub">Picture your message landing perfectly, your audience feeling something, your brand being unforgettable. Most organizations, universities, banks, healthcare systems, consumer brands, don't have time to think about how to market themselves. That's the problem we solve. Concept development, scriptwriting, on-location production, post-production, original scoring, and final delivery. Every creative decision, from the first idea to the finished product.</p>
     <div class="hero-actions">
-      <a href="#work" class="btn-primary">See Our Work &nbsp;→</a>
-      <a href="#cta" class="btn-ghost">Let's talk &nbsp;↗</a>
+      <p class="hero-sub">Full-Service Creative &amp; Media Production</p>
+      <div class="hero-btns">
+        <a href="#work" class="btn-primary">See Our Work &nbsp;→</a>
+        <a href="#cta" class="btn-ghost">Let's talk &nbsp;↗</a>
+      </div>
     </div>
   </div>
   <div class="scroll-hint">
@@ -649,9 +716,9 @@ footer { border-top: 1px solid var(--border); }
     <div class="services-header">
       <div>
         <div class="section-label">What We Do</div>
-        <h2 class="display-heading">THE FULL<br>PICTURE.</h2>
+        <h2 class="display-heading">THE FULL PICTURE.</h2>
       </div>
-      <p class="services-intro">One partnership. Every creative need. We function as your in-house production studio — scripting, filming, scoring, and delivering work that a full creative team would take months to coordinate.</p>
+      <p class="services-intro">Picture your message landing perfectly, your audience feeling something, your brand being unforgettable. Most organizations, universities, banks, healthcare systems, consumer brands, don't have time to think about how to market themselves. That's the problem we solve. Concept development, scriptwriting, on-location production, post-production, original scoring, and final delivery. Every creative decision, from the first idea to the finished product.</p>
     </div>
     <div class="services-grid">
       <div class="service-card sc-1 fade-up">
@@ -660,7 +727,7 @@ footer { border-top: 1px solid var(--border); }
         <div class="sc-content">
           <span class="s-num">01</span>
           <div class="s-title">Scripting & Storytelling</div>
-          <p class="s-desc">Every great project starts with a great story. We craft narratives that anchor your brand — blending creative strategy with a songwriter's instinct for emotion and clarity.</p>
+          <p class="s-desc">Every great project starts with a great story. We craft narratives that anchor your brand, blending creative strategy with a songwriter's instinct for emotion and clarity.</p>
           <div class="s-tags">
             <span class="s-tag">Concept Development</span>
             <span class="s-tag">Script Writing</span>
@@ -674,7 +741,7 @@ footer { border-top: 1px solid var(--border); }
         <div class="sc-content">
           <span class="s-num">02</span>
           <div class="s-title">Video Production</div>
-          <p class="s-desc">Cinematic capture with purpose. Our team brings your story to life on location — every frame crafted to move audiences and elevate your brand above the noise.</p>
+          <p class="s-desc">Cinematic capture with purpose. Our team brings your story to life on location, every frame crafted to move audiences and elevate your brand above the noise.</p>
           <div class="s-tags">
             <span class="s-tag">On-Location Shoots</span>
             <span class="s-tag">Direction</span>
@@ -702,7 +769,7 @@ footer { border-top: 1px solid var(--border); }
         <div class="sc-content">
           <span class="s-num">04</span>
           <div class="s-title">Custom Music Production</div>
-          <p class="s-desc">Gold and Platinum award-winning music production built for your brand. Original scores and compositions that make every scene — and your entire campaign — unforgettable.</p>
+          <p class="s-desc">Gold and Platinum award-winning music production built for your brand. Original scores and compositions that make every scene and your entire campaign unforgettable.</p>
           <div class="s-tags">
             <span class="s-tag">Original Scoring</span>
             <span class="s-tag">Composition</span>
@@ -718,53 +785,83 @@ footer { border-top: 1px solid var(--border); }
   <div class="section-inner">
     <div class="work-header">
       <div class="section-label">Our Work</div>
-      <h2 class="display-heading">SELECTED<br>PROJECTS.</h2>
+      <h2 class="display-heading">RECENT PROJECTS.</h2>
     </div>
-    <div class="work-bars">
-      <div class="work-bar wb-1 fade-up" data-yt="LGueF4OO7Wo" data-src="videos/MSJ Web Clip.mp4" data-title="Mt. Saint Joseph University" data-cat="Animation · Brand">
+    <div class="work-bars fade-up">
+      <div class="work-bar wb-1" data-yt="LGueF4OO7Wo" data-src="videos/MSJ Web Clip.mp4" data-title="Mt. Saint Joseph University" data-cat="Broadcast · Commercial">
         <video class="work-vid" muted loop playsinline preload="none" data-src="videos/MSJ Web Clip.mp4"></video>
         <div class="wb-color"></div>
         <div class="wb-title-vert">Mt. Saint Joseph</div>
         <div class="wb-label">
           <div class="wb-detail">
             <div class="w-client">Mt. Saint Joseph University</div>
-            <div class="w-cat">Animation · Brand</div>
+            <div class="w-cat">Broadcast · Commercial</div>
+            <div class="w-role">Full Creative</div>
             <div class="w-play"><div class="w-play-icon"></div>Watch</div>
           </div>
         </div>
       </div>
-      <div class="work-bar wb-2 fade-up" data-yt="3PotkX72bGg" data-src="videos/Vistra Web Clip.mp4" data-title="Vistra Energy" data-cat="Training · Corporate">
+      <div class="work-bar wb-2" data-yt="3PotkX72bGg" data-src="videos/Vistra Web Clip.mp4" data-title="Vistra Energy" data-cat="Internal · Corporate">
         <video class="work-vid" muted loop playsinline preload="none" data-src="videos/Vistra Web Clip.mp4"></video>
         <div class="wb-color"></div>
         <div class="wb-title-vert">Vistra Energy</div>
         <div class="wb-label">
           <div class="wb-detail">
             <div class="w-client">Vistra Energy</div>
-            <div class="w-cat">Training · Corporate</div>
+            <div class="w-cat">Internal · Corporate</div>
+            <div class="w-role">Full Creative</div>
             <div class="w-play"><div class="w-play-icon"></div>Watch</div>
           </div>
         </div>
       </div>
-      <div class="work-bar wb-3 fade-up" data-yt="b40RaFEQTos" data-src="videos/Sig Web Clip.mp4" data-title="Signature Hardware" data-cat="Commercial · Brand Film">
+      <div class="work-bar wb-3" data-yt="b40RaFEQTos" data-src="videos/Sig Web Clip.mp4" data-title="Signature Hardware" data-cat="Broadcast · Commercial">
         <video class="work-vid" muted loop playsinline preload="none" data-src="videos/Sig Web Clip.mp4"></video>
         <div class="wb-color"></div>
         <div class="wb-title-vert">Signature Hardware</div>
         <div class="wb-label">
           <div class="wb-detail">
             <div class="w-client">Signature Hardware</div>
-            <div class="w-cat">Commercial · Brand Film</div>
+            <div class="w-cat">Broadcast · Commercial</div>
+            <div class="w-role">Music & Audio</div>
             <div class="w-play"><div class="w-play-icon"></div>Watch</div>
           </div>
         </div>
       </div>
-      <div class="work-bar wb-4 fade-up" data-yt="f0WOYiIV6Ck" data-src="videos/Olay Web Clip.mp4" data-title="Procter & Gamble — Olay" data-cat="Commercial">
+      <div class="work-bar wb-4" data-yt="f0WOYiIV6Ck" data-src="videos/Olay Web Clip.mp4" data-title="Procter & Gamble — Olay" data-cat="Broadcast · Commercial">
         <video class="work-vid" muted loop playsinline preload="none" data-src="videos/Olay Web Clip.mp4"></video>
         <div class="wb-color"></div>
         <div class="wb-title-vert">Olay</div>
         <div class="wb-label">
           <div class="wb-detail">
             <div class="w-client">Procter &amp; Gamble — Olay</div>
-            <div class="w-cat">Commercial</div>
+            <div class="w-cat">Broadcast · Commercial</div>
+            <div class="w-role">Music & Audio</div>
+            <div class="w-play"><div class="w-play-icon"></div>Watch</div>
+          </div>
+        </div>
+      </div>
+      <div class="work-bar wb-5" data-yt="EAH5xpxwicE" data-src="videos/prestige-webclip.mp4" data-title="Prestige Properties" data-cat="Real Estate · Investor Film">
+        <video class="work-vid" muted loop playsinline preload="none" data-src="videos/prestige-webclip.mp4"></video>
+        <div class="wb-color"></div>
+        <div class="wb-title-vert">Prestige Properties</div>
+        <div class="wb-label">
+          <div class="wb-detail">
+            <div class="w-client">Prestige Properties</div>
+            <div class="w-cat">Real Estate · Investor Film</div>
+            <div class="w-role">Full Creative</div>
+            <div class="w-play"><div class="w-play-icon"></div>Watch</div>
+          </div>
+        </div>
+      </div>
+      <div class="work-bar wb-6" data-yt="H0FQeskhJuE" data-src="videos/safeguard-webclip.mp4" data-title="Safeguard" data-cat="Broadcast · Commercial">
+        <video class="work-vid" muted loop playsinline preload="none" data-src="videos/safeguard-webclip.mp4"></video>
+        <div class="wb-color"></div>
+        <div class="wb-title-vert">Safeguard</div>
+        <div class="wb-label">
+          <div class="wb-detail">
+            <div class="w-client">Safeguard</div>
+            <div class="w-cat">Broadcast · Commercial</div>
+            <div class="w-role">Music & Audio</div>
             <div class="w-play"><div class="w-play-icon"></div>Watch</div>
           </div>
         </div>
@@ -776,11 +873,11 @@ footer { border-top: 1px solid var(--border); }
 <section id="team">
   <div class="section-inner">
     <div class="section-label">Who We Are</div>
-    <h2 class="display-heading">THE PEOPLE<br>BEHIND IT.</h2>
+    <h2 class="display-heading">THE PEOPLE BEHIND IT.</h2>
     <div class="team-grid">
       <div class="team-colorbar tcb-left"></div>
       <div class="team-colorbar tcb-left2"></div>
-      <div class="team-card tc-1 fade-up">
+      <div class="team-card tc-1">
         <div class="tc-color"></div>
         <div class="tc-photo-wrap">
           <img class="tc-photo" src="ashley-1.jpg" alt="Ashley Shepherd">
@@ -792,7 +889,7 @@ footer { border-top: 1px solid var(--border); }
           <p class="t-bio">A Gold and Platinum award-winning recording engineer, Ashley has shaped records for Peter Frampton, Blessed Union of Souls, and Walk the Moon. He brings a storyteller's instinct to every frame and every mix.</p>
         </div>
       </div>
-      <div class="team-card tc-2 fade-up">
+      <div class="team-card tc-2">
         <div class="tc-color"></div>
         <div class="tc-photo-wrap">
           <img class="tc-photo" src="ben-1.jpg" alt="Benjamin Davis">
@@ -804,7 +901,7 @@ footer { border-top: 1px solid var(--border); }
           <p class="t-bio">A multidisciplinary creative whose career grew from self-produced music into filmmaking, creative direction, and brand storytelling. His unconventional path continues to shape PictureMusic's cinematic approach.</p>
         </div>
       </div>
-      <div class="team-card tc-3 fade-up">
+      <div class="team-card tc-3">
         <div class="tc-color"></div>
         <div class="tc-photo-wrap">
           <img class="tc-photo" src="matt-1.jpg" alt="Matt Hueneman">
@@ -826,7 +923,7 @@ footer { border-top: 1px solid var(--border); }
   <div class="cta-glow"></div>
   <div class="colorbar" style="position:absolute;top:0;left:0;right:0;"><div></div><div></div><div></div><div></div><div></div><div></div></div>
   <div class="cta-inner">
-    <div class="section-label" style="justify-content:center;">Get In Touch</div>
+    <div class="section-label cta-label" style="justify-content:center;">Get In Touch</div>
     <h2 class="cta-title">READY TO MAKE<br>SOMETHING?</h2>
     <p class="cta-sub">We'd love to hear about your project. Let's figure out how to tell your story in a way that resonates.</p>
     <a href="#" class="btn-primary" id="ctaEmailBtn">Start A Conversation &nbsp;→</a>
@@ -911,9 +1008,23 @@ setInterval(() => {
   }
 }, 1100);
 
+const teamGrid = document.querySelector('.team-grid');
+if (teamGrid) {
+  new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      teamGrid.classList.add('team-visible');
+    } else {
+      teamGrid.classList.remove('team-visible');
+    }
+  }, { threshold: 0.4 }).observe(teamGrid);
+}
+
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+    else e.target.classList.remove('visible');
+  });
+}, { threshold: [0, 0.5] });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
 // Portfolio videos: preload on scroll proximity, preview on hover, lightbox on click
