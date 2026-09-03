@@ -579,7 +579,10 @@ footer { border-top: 1px solid var(--border); }
 
 
 <div id="intro">
-  <img id="introLogo" src="PictureMusic%20Logo.png" alt="PICTUREMUSIC">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:2rem;">
+    <img id="introLogo" src="PictureMusic%20Logo.png" alt="PICTUREMUSIC">
+    <div id="introEnter" style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:0.18em;color:rgba(255,255,255,0.5);cursor:pointer;border:1px solid rgba(255,255,255,0.2);padding:10px 28px;border-radius:2px;opacity:0;transition:opacity 0.6s ease;">ENTER</div>
+  </div>
 </div>
 
 <nav id="mainNav">
@@ -979,11 +982,20 @@ footer { border-top: 1px solid var(--border); }
 // Intro sequence: glitch logo full-screen, then slide up into nav
 const intro = document.getElementById('intro');
 const nav   = document.getElementById('mainNav');
+const introEnter = document.getElementById('introEnter');
+
 setTimeout(() => {
+  introEnter.style.opacity = '1';
+}, 1800);
+
+function dismissIntro() {
   intro.classList.add('exit');
   nav.classList.add('visible');
-}, 2200);
-setTimeout(() => { intro.style.display = 'none'; }, 2900);
+  setTimeout(() => { intro.style.display = 'none'; }, 700);
+}
+
+introEnter.addEventListener('click', dismissIntro);
+introEnter.addEventListener('touchend', dismissIntro);
 
 const WORDS = [
   { text: 'COMING ALIVE.',  color: 'var(--cyan)' },
